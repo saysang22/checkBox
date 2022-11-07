@@ -9,6 +9,7 @@ interface DataType  {
     setData: Function,
     setCheckList: Function,
     check: boolean,
+    setStatus: Function,
     data: any,
     a: {
         id: number,
@@ -20,9 +21,10 @@ interface DataType  {
 }
 
 
-const Check = ({name, age, label, setData, data, a, setCheckList, check} :DataType ) => {
+const Check = ({name, age, label, setData, data, a, setCheckList, check, setStatus} :DataType ) => {
     
     function testEv(check :boolean) :void{
+        let total_checked = 0
         let copy = [...data];
         copy[a.id].check= !check ;
         setData(copy);
@@ -40,11 +42,14 @@ const Check = ({name, age, label, setData, data, a, setCheckList, check} :DataTy
         // }
 
         let check2 = copy.filter((a) => {
+            a.check === true ? total_checked++ : total_checked;
             return (
                 a.check === true ? a : null
             )
         })
         setCheckList(check2)
+        console.log(copy.length, total_checked)
+        setStatus(copy.length === total_checked)
         // console.log(check2)
     }
 

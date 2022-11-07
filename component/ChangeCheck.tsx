@@ -1,5 +1,7 @@
 interface ChangeType {
     label: string,
+    status: boolean,
+    setStatus: Function,
     data: {
         id: number,
         name: string,
@@ -13,7 +15,7 @@ interface ChangeType {
     setCheckList: Function,
 }
 
-const ChangeCheck = ({label, data, setData, setCheckList} :ChangeType) => {
+const ChangeCheck = ({label, data, setData, setCheckList, status, setStatus} :ChangeType) => {
 
     function test(e :any){
         console.log(e.target.checked)
@@ -26,6 +28,7 @@ const ChangeCheck = ({label, data, setData, setCheckList} :ChangeType) => {
         })
 
         setData(copy)
+        setStatus(e.target.checked)
 
         let check2 = copy.filter((a) => {
             return (
@@ -38,7 +41,7 @@ const ChangeCheck = ({label, data, setData, setCheckList} :ChangeType) => {
 
     return (
         <label>
-            <input type="checkbox" onChange={(e) => {test(e)}}/>
+            <input type="checkbox" checked={status} onChange={(e) => {test(e)}}/>
             {label}
         </label>
     )

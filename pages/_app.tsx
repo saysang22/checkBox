@@ -3,9 +3,11 @@ import type { AppProps } from 'next/app'
 import Check from '../component/Check'
 import { useState } from 'react'
 import ChangeCheck from '../component/ChangeCheck';
+import Radio from '../component/Radio';
 
 export default function App({ Component, pageProps }: AppProps) {
 
+  const [status, setStatus] = useState(false);
   const [checkList, setCheckList] = useState([]);
 
   const [data, setData] = useState([
@@ -64,13 +66,33 @@ export default function App({ Component, pageProps }: AppProps) {
         data = { data }
         setCheckList = {setCheckList}
         check = {a.check}
+        setStatus = {setStatus}
         />
         </div>
       )
     })
   }
   
-  <ChangeCheck label = '전체' data = {data} setData = {setData} setCheckList = {setCheckList}/>
+  <ChangeCheck label = '전체' data = {data} setData = {setData} setCheckList = {setCheckList} status={status} setStatus = {setStatus}/>
+  {/* {
+    data.map((a) => {
+      return (
+        <div key={a.id}>
+        <Radio name='test' label = {a.label}/>
+        </div>
+      )
+    })
+  } */}
+    {/* {
+    data.map((a) => {
+      return (
+        <div key={a.id}>
+        <Radio name='test2' label={a.name}/>
+        </div>
+      )
+    })
+  }
+ */}
   <Component {...pageProps} />
   </>
 }
